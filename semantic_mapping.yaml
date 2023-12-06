@@ -1,0 +1,58 @@
+ieee:
+  ENTRYTYPE:
+    IEEE Magazines: article
+    IEEE Journals: article
+    Wiley Data and Cybersecurity eBook Chapters: inbook
+    River eBook Chapters: inbook
+    IEEE Conferences: inproceedings
+    TUP Journals: article
+    IEEE Early Access Articles: article
+    VDE Conferences: inproceedings
+    OUP Journals: article
+    IEEE Standards: misc
+    IET Conferences: inproceedings
+    Wiley-IEEE Press eBook Chapters: inbook
+    Artech Books: book
+    " Standards": misc
+scopus:
+  ENTRYTYPE:
+    Note: misc
+    Article: article
+    Review: article
+    Data Paper: misc
+    Conference Paper: inproceedings
+    Book Chapter: inbook
+    Conference Review: misc
+    Editorial: misc
+    Erratum: misc
+    Short Survey: article
+    Book: book
+    Letter: misc
+    Retracted: misc
+pubmed:
+  ENTRYTYPE:
+    #Bibliography: misc
+    #Case Reports: misc
+    #Clinical Study: misc
+    Clinical Trial: misc
+    Clinical Trial Protocol: misc
+    Comment: misc
+    #Comparative Study: article
+    #Congress: misc
+    #Consensus Development Conference: misc
+    #Controlled Clinical Trial: misc
+    Dataset: misc
+    #Directory: misc
+    Editorial: misc
+    #English Abstract: misc
+    #Evaluation Study: misc
+    #Guideline: misc
+    #Historical Article: article
+    Journal Article: article
+      #Legislation: misc
+    Letter: misc
+    News: misc
+    Newspaper Article: misc
+      #Preprint: misc
+    Review: article
+    Systematic Review: article

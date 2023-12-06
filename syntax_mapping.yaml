@@ -1,0 +1,30 @@
+ieee:
+  - Document Identifier: ENTRYTYPE
+  - Authors: author
+  - Document Title: title
+  - Publication Title: journal
+  - Publication Title: booktitle
+  - Publication Year: year
+  - Abstract: abstract
+  - DOI: doi
+  - ISBNs: isbn
+scopus:
+  - Document Type: ENTRYTYPE
+  - EID: ID
+  - Authors: author
+  - Title: title
+  - Source title: journal
+  - Source title: booktitle
+  - Year: year
+  - DOI: doi
+pubmed:
+  - PT: ENTRYTYPE
+  - PMID: ID
+  - FAU: author
+  - AB: abstract
+  - TI: title
+  - BTI: booktitle
+  - JT: journal
+  - DP: year
+  - ISBN: isbn
+  - AID: doi
