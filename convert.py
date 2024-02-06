@@ -6,8 +6,8 @@ import os
 import sys
 from typing import Dict, List, Iterable
 
-from bibtexparser.bwriter import BibTexWriter
-from bibtexparser.bibdatabase import BibDatabase
+import bibtexparser
+from bibtexparser.library import Library
 import yaml
 
 
@@ -262,7 +262,7 @@ def preprocess_entry(entry: dict, dialect: str):
         return pubmed_preprocess(entry)
 
 
-def transform(dialect: str, entries: Iterable[dict]):
+def transform(dialect: str, entries: Iterable[dict]) -> Library:
     """Iteratively transform each entry according to their dialect.
 
     Keyword arguments:
@@ -270,9 +270,9 @@ def transform(dialect: str, entries: Iterable[dict]):
     entries -- The entries to iterate over.
 
     Returns:
-    A BibDatabase object containing the transformed entries.
+    A Library object containing the transformed entries.
     """
-    database = BibDatabase()
+    database = Library()
     for i, row in enumerate(entries):
         entry = preprocess_entry(row, dialect)
         entry = schema_map(i, entry, dialect)
@@ -296,9 +296,8 @@ def convert_csv(dialect: str, csvfile: str, bibfile: str):
             f.seek(0)
         reader = csv.DictReader(f, delimiter=",")
         database = transform(dialect, reader)
-    writer = BibTexWriter()
-    with open(bibfile, "w") as file:
-        file.write(writer.write(database))
+
+    bibtexparser.write_file(bibfile, database)
 
 
 def convert_ris(dialect: str, risfile: str, bibfile: str):
@@ -311,9 +310,7 @@ def convert_ris(dialect: str, risfile: str, bibfile: str):
     """
     with RISFileReader(risfile) as ris:
         database = transform(dialect, ris)
-    writer = BibTexWriter()
-    with open(bibfile, "w") as file:
-        file.write(writer.write(database))
+    bibtexparser.write_file(bibfile, database)
 
 
 if __name__ == "__main__":
