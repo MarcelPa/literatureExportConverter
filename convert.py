@@ -8,6 +8,7 @@ from typing import Dict, List, Iterable
 
 import bibtexparser
 from bibtexparser.library import Library
+from bibtexparser.model import Entry, Field
 import yaml
 
 
@@ -102,7 +103,7 @@ def batched(iterable, n):
     "Batch data into tuples of length n. The last batch may be shorter."
     # batched('ABCDEFG', 3) --> ABC DEF G
     if n < 1:
-        raise ValueError('n must be at least one')
+        raise ValueError("n must be at least one")
     it = iter(iterable)
     while batch := tuple(itertools.islice(it, n)):
         yield batch
@@ -191,7 +192,7 @@ def scopus_author_canonicalize(authors: str):
     names = []
     i = 0
     while i < len(author_split) - 1:
-        last_name, first_name = author_split[i: i+2]
+        last_name, first_name = author_split[i : i + 2]
         if "." not in first_name:
             names.append(last_name.strip())
             i += 1
@@ -278,7 +279,14 @@ def transform(dialect: str, entries: Iterable[dict]) -> Library:
         entry = schema_map(i, entry, dialect)
         entry = semantic_map(entry, dialect)
         entry = clean_entry(entry, dialect)
-        database.entries.append(entry)
+        entry_lib = Entry(
+            entry_type=entry["ENTRYTYPE"],
+            key=entry["ID"],
+            fields=[
+                Field(k, v) for k, v in entry.items() if k not in ["ENTRYTYPE", "ID"]
+            ],
+        )
+        database.add(entry_lib)
     return database
 
 
@@ -319,7 +327,7 @@ if __name__ == "__main__":
         "format",
         type=str,
         help="Format of the input file.",
-        choices=["ieee", "scopus", "pubmed"]
+        choices=["ieee", "scopus", "pubmed"],
     )
     parser.add_argument("file", type=str, help="Path to the source file.")
     parser.add_argument("bibfile", type=str, help="Path to BibTeX file.")
